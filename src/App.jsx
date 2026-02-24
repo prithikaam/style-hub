@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   const categories = [
     { name: 'Casual Wear', img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80' },
-    { name: 'Party Wear', img: '/party-wear.png' },
+    { name: 'Party Wear', img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80' },
     { name: 'Traditional', img: 'https://images.unsplash.com/photo-1551163943-3f6a855d1153?w=600&q=80' },
     { name: 'Western', img: 'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=600&q=80' }
   ];

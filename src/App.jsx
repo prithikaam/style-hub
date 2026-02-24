@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const categories = [
     { name: 'Casual Wear', img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80' },
     { name: 'Party Wear', img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80' },
@@ -10,23 +12,38 @@ function App() {
   ];
 
   const products = [
-    { id: 1, name: 'Floral Summer Dress', price: '\u20B91,299', img: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=500&q=80' },
-    { id: 2, name: 'Elegant Evening Gown', price: '\u20B93,499', img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&q=80' },
-    { id: 3, name: 'Classic Denim Jacket', price: '\u20B91,899', img: 'https://images.unsplash.com/photo-1550639525-c97d455acf70?w=500&q=80' },
-    { id: 4, name: 'Printed Silk Saree', price: '\u20B94,299', img: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&q=80' }
+    { id: 1, name: 'Floral Summer Dress', price: '₹1,299', img: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=500&q=80' },
+    { id: 2, name: 'Elegant Evening Gown', price: '₹3,499', img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&q=80' },
+    { id: 3, name: 'Classic Denim Jacket', price: '₹1,899', img: 'https://images.unsplash.com/photo-1550639525-c97d455acf70?w=500&q=80' },
+    { id: 4, name: 'Printed Silk Saree', price: '₹4,299', img: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&q=80' }
   ];
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <div className="app">
       {/* Navbar */}
       <nav className="navbar">
         <div className="logo">StyleHub</div>
-        <div className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#shop">Shop</a>
-          <a href="#categories">Categories</a>
-          <a href="#contact">Contact</a>
-          <button className="btn-primary">Shop Now</button>
+
+        {/* Hamburger button (mobile only) */}
+        <button
+          className={`hamburger ${menuOpen ? 'open' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        {/* Nav links */}
+        <div className={`nav-links ${menuOpen ? 'nav-open' : ''}`}>
+          <a href="#home" onClick={closeMenu}>Home</a>
+          <a href="#shop" onClick={closeMenu}>Shop</a>
+          <a href="#categories" onClick={closeMenu}>Categories</a>
+          <a href="#contact" onClick={closeMenu}>Contact</a>
+          <button className="btn-primary" onClick={closeMenu}>Shop Now</button>
         </div>
       </nav>
 

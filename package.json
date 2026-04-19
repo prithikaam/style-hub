@@ -7,7 +7,9 @@
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "seed": "cd server && npm run seed",
-    "seed:destroy": "cd server && npm run seed:destroy"
+    "seed:destroy": "cd server && npm run seed:destroy",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "start": "node server/index.js"
   },
   "keywords": [],
   "author": "",

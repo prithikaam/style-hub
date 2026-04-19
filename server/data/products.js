@@ -60,7 +60,7 @@ const products = [
   },
   {
     name: 'Sequined Cocktail Dress',
-    image: 'https://images.unsplash.com/photo-1529139513466-4209121f18a6?w=600',
+    image: '/sequined_dress.png',
     description: 'Shimmering sequins that catch the light at every turn.',
     category: 'Party',
     price: 3499,
@@ -68,7 +68,7 @@ const products = [
   },
   {
     name: 'Velvet Wrap Dress',
-    image: 'https://images.unsplash.com/photo-1539109132314-347596d6b508?w=600',
+    image: '/velvet_dress.png',
     description: 'Luxurious velvet wrap dress in a deep burgundy.',
     category: 'Party',
     price: 2899,

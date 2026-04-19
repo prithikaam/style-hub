@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import API from '../api/axios';
 import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
 import './HomePage.css';
@@ -11,18 +12,25 @@ const categories = [
   { name: 'Western', img: 'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=600&q=80' },
 ];
 
-const featuredProducts = [
-  { id: 1, name: 'Floral Summer Dress', price: 1299, img: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&q=80', category: 'Summer' },
-  { id: 2, name: 'Elegant Evening Gown', price: 4999, img: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=500&q=80', category: 'Party' },
-  { id: 3, name: 'Boho Maxi Dress', price: 1899, img: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500&q=80', category: 'Boho' },
-  { id: 4, name: 'Little Black Dress', price: 2499, img: 'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=500&q=80', category: 'Party' },
-];
-
 const HomePage = () => {
   const { addToCart } = useCart();
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const { data } = await API.get('/products');
+        const featured = data.filter(p => p.category === 'Party').slice(0, 4);
+        setFeaturedProducts(featured.length ? featured : data.slice(0, 4));
+      } catch (err) {
+        console.error('Failed to load products');
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const handleAddToCart = (product) => {
-    addToCart({ ...product, _id: String(product.id), image: product.img });
+    addToCart(product);
     toast.success(`${product.name} added to cart!`);
   };
 
@@ -77,9 +85,9 @@ const HomePage = () => {
         </div>
         <div className="products-grid">
           {featuredProducts.map((product) => (
-            <div className="product-card" key={product.id}>
+            <div className="product-card" key={product._id}>
               <div className="product-img-wrap">
-                <img src={product.img} alt={product.name} className="product-img" />
+                <img src={product.image} alt={product.name} className="product-img" />
                 <div className="product-quick-view">
                   <Link to="/products">Quick View</Link>
                 </div>
